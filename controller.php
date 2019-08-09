@@ -8,14 +8,25 @@ $manager = new NewsManager($db);
 
 if (isset($_POST['submit']))
 {	
-	$insertPost = $manager->addNews();	
+	$news = new News(
+		[
+			'titre' => $_POST['titre'],
+      		'contenu' => $_POST['contenu']
+		]
+	);
+
+	$insertPost = $manager->addNews($news);
+	// $insertPost = $manager->addNews();	
 }	
 
 $data = $manager->getNews();
 
 if (isset($_POST['delete']))
 {
-	$delete = $manager->deleteNews();
+	$manager->deleteNews((int) $_POST['delete']);
+	// $delete = $manager->deleteNews();
 }
+
+
 
 require('index.php');

@@ -24,14 +24,18 @@
 						<ul class="actions">
 							<li><input type="submit" value="Publier" class="alt" name="submit" /></li>
 						</ul>
+					</form>
 						<?php
 						while($post = $data->fetch())
 							{
 						?>
-								<h3><?= htmlspecialchars($post['titre']) ?></h3>
-								<p><?= htmlspecialchars($post['contenu']) ?></p>
+								<h3><?= ($post['titre']) ?></h3>
+								<p><?= ($post['contenu']) ?></p>
 								<form method="post" action="controller.php">
 									<button type="delete" value="<?php echo $post['id']; ?>" name="delete">Supprimer</button>
+								</form>
+								<form method="post" action="controlleronepost">
+								<button type="modifier" value="<?php echo $post['id']; ?>" name="modifier">Modifier</button>
 								</form>
 						<?php
 							}
