@@ -1,7 +1,7 @@
 <?php
 function autoload($classname)
 {
-  if (file_exists($file = __DIR__ . '/' . $classname . '.php'))
+  if (file_exists($file = 'Model/' . $classname . '.php'))
   {
     require $file;
   }

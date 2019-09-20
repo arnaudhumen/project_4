@@ -11,7 +11,7 @@ class NewsManager
 
   	public function addNews(News $news)
   	{
-  		$requete = $this->db->prepare('INSERT INTO news(titre, contenu, dateAjout, dateModif) VALUES(:titre, :contenu, NOW(), NOW())');
+  		$requete = $this->db->prepare('INSERT INTO blog(titre, contenu, dateAjout, dateModif) VALUES(:titre, :contenu, NOW(), NOW())');
   		$requete->bindValue(':titre', $_POST['titre']);
   		$requete->bindValue(':contenu', $_POST['contenu']);
 
@@ -20,18 +20,18 @@ class NewsManager
 
   	public function getNews()
   	{
-  		$requete = $this->db->query('SELECT titre, contenu, dateAjout, id FROM news ORDER BY id ASC');
+  		$requete = $this->db->query('SELECT titre, contenu, dateAjout, id FROM blog ORDER BY id ASC');
   		return $requete;
   	}
 
     public function deleteNews($id)
     {
-      $this->db->exec('DELETE FROM news WHERE id = '. $_POST['delete']);
+      $this->db->exec('DELETE FROM blog WHERE id = ' . $_POST['delete']);
     }
 
     public function getOneNews($id)
     {
-      $requete = $this->db->prepare('SELECT titre, contenu FROM news WHERE id = :id');
+      $requete = $this->db->prepare('SELECT titre, contenu FROM blog WHERE id = :id');
       $requete->bindValue(':id', (int)$id, PDO::PARAM_INT);
       $requete->execute();
 
@@ -42,7 +42,7 @@ class NewsManager
 
     public function updateNews(News $news)
     {
-      $requete = $this->db->prepare('UPDATE news SET titre = :titre, contenu = :contenu, dateModif = NOW() WHERE id = :id');
+      $requete = $this->db->prepare('UPDATE blog SET titre = :titre, contenu = :contenu, dateModif = NOW() WHERE id = :id');
     
       $requete->bindValue(':titre', $news->titre());    
       $requete->bindValue(':contenu', $news->contenu());
