@@ -26,7 +26,7 @@ class NewsManager
 
     public function deleteNews($id)
     {
-      $this->db->exec('DELETE FROM blog WHERE id = ' . $_POST['delete']);
+      $this->db->exec('DELETE FROM blog WHERE id = ' . $_GET['id']);
     }
 
     public function getOneNews($id)
