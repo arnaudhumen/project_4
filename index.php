@@ -13,17 +13,32 @@ if (isset($_GET['action']))
 
 	elseif ($_GET['action'] == 'supprimer')
 	{
-		deletePost();
+		deletePost($_GET['id']);
 	}
 
 	elseif ($_GET['action'] == 'modifier')
 	{
-		modifyPost(); 
+		modifyPost($_GET['id']); 
 	}
 
 	elseif ($_GET['action'] == 'update')
 	{
-		updatePost();
+		updatePost((int) $_POST['id'], $_POST['titre'], $_POST['contenu']);
+	}
+
+	elseif ($_GET['action'] == 'listPost')
+	{
+		listPost($_GET['id']);
+	}
+
+	elseif ($_GET['action'] == 'addComment')
+	{
+		addComment((int)$_GET['id'], $_POST['nom'], $_POST['contenu_commentaire']);
+	}
+
+	elseif ($_GET['action'] == 'listComment')
+	{
+		listComment($_GET['id']);
 	}
 }
 

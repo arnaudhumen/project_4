@@ -9,18 +9,19 @@ class CommentsManager
     $this->db = $db;
   	}
 
-  	public function addComment(Commentaire $comments)
+  	public function postComment($postId, $nom, $contenuCom)
   	{
-  		$requete = $this->db->prepare('INSERT INTO commentaires(nom, contenu, dateAjout, dateModif) VALUES(:titre, :contenu, NOW(), NOW())');
-  		$requete->bindValue(':nom', $_POST['nom']);
-  		$requete->bindValue(':contenu', $_POST['contenu']);
+  		$requete = $this->db->prepare('INSERT INTO commentaires(post_id, nom, contenu_commentaire, dateAjout, dateModif) VALUES(?, ?, ?, NOW(), NOW())');
+  		$affectedLines = $requete->execute(array($postId, $nom, $contenuCom));
 
-  		$requete->execute();
+  		return $affectedLines;
   	}
 
-  	public function getComment()
+  	public function getComments($postId)
   	{
-  		$requete = $this->db->query('SELECT nom, contenu, dateAjout, id FROM commentaires ORDER BY id ASC');
+  		$requete = $this->db->prepare('SELECT id, nom, contenu_commentaire, dateAjout FROM commentaires WHERE post_id = ? ORDER BY id ASC');
+      $requete->execute(array($postId));
+
   		return $requete;
   	}
 
@@ -31,7 +32,7 @@ class CommentsManager
 
     public function getOneComment($id)
     {
-      $requete = $this->db->prepare('SELECT nom, contenu FROM commentaires WHERE id = :id');
+      $requete = $this->db->prepare('SELECT nom, contenu_commentaire FROM commentaires WHERE id = :id');
       $requete->bindValue(':id', (int)$id, PDO::PARAM_INT);
       $requete->execute();
 
@@ -40,9 +41,9 @@ class CommentsManager
       return $news;
     }
 
-    public function updateComment(Commentaire $comments)
+    public function updateComment(Commentaires $comments)
     {
-      $requete = $this->db->prepare('UPDATE commentaires SET nom = :nom, contenu = :contenu, dateModif = NOW() WHERE id = :id');
+      $requete = $this->db->prepare('UPDATE commentaires SET nom = :nom, contenu_commentaire = :contenu, dateModif = NOW() WHERE id = :id');
     
       $requete->bindValue(':nom', $comments->nom());    
       $requete->bindValue(':contenu', $comments->contenu());

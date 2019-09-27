@@ -16,9 +16,7 @@ function addPost()
 			);
 			$insertPost = $manager->addNews($news);
 
-		}
-		
-	
+		}	
 	
 	require('View/NewPost.php');
 }
@@ -36,27 +34,28 @@ function listPosts()
 
 
 
-function deletePost()
+function deletePost(int $id)
 {	
 	$db = DBFactory::getMysqlConnexionWithPDO();
 	$manager = new NewsManager($db);
 
-	$manager->deleteNews((int) $_POST['delete']);
+	$manager->deleteNews((int) $_GET['id']);
 	$data = $manager->getNews();	
 	require('View/listPostView.php');	
 }
 
-function modifyPost() 
+function modifyPost(int $id) 
 {	
 	$db = DBFactory::getMysqlConnexionWithPDO();
 	$manager = new NewsManager($db);
-	$news = $manager->getOneNews((int) $_POST['modifier']);	
+
+	$news = $manager->getOneNews($id);	
 	require('View/modifyPost.php');
 }
 
 
 
-function updatePost()
+function updatePost(int $id, $titre, $contenu)
 {
 $db = DBFactory::getMysqlConnexionWithPDO();
 $manager = new NewsManager($db);
@@ -64,9 +63,9 @@ $manager = new NewsManager($db);
 
 	$news = new News(
 		[
-			'titre' => $_POST['titre'],
-      		'contenu' => $_POST['contenu'],
-      		'id' => $_POST['id']
+			'titre' => $titre,
+      		'contenu' => $contenu,
+      		'id' => $id
 		]
 	);
 

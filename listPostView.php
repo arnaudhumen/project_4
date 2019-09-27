@@ -20,22 +20,19 @@
 <?php
 while ($post = $data->fetch())
 {
-echo '<tr><td>' . $post['titre'] . '</td><td>' . $post['contenu']. '</td> <td><form method="post" action="index.php?action=modifier">
-								<button type="modifier" value="' . $post['id'] . '" name="modifier">Modifier</button>
-								</form> | <form method="post" action="index.php?action=supprimer">
-										<button type="delete" value="' . $post['id'] . '" name="delete">Supprimer</button>
-								</form></td> <td><a href="View/postCommentView.php">Commentaires</a></td></tr>' ;
-  /*echo '<tr><td>' $news->titre(), '</td><td>', $news->dateAjout()->format('d/m/Y à H\hi'), '</td><td>', ($news->dateAjout() == $news->dateModif() ? '-' : $news->dateModif()->format('d/m/Y à H\hi')), '</td><td><a href="?modifier=', $news->id(), '">Modifier</a> | <a href="?supprimer=', $news->id(), '">Supprimer</a></td></tr>', "\n";*/
- /* echo '<form method="post" action="index.php?action=supprimer">
-									<button type="delete" value="' . $post['id'] . '" name="delete">Supprimer</button>
-								</form>
-								<form method="post" action="controlleronepost">
-								<button type="modifier" value="' . $post['id'] . '" name="modifier">Modifier</button>
-								</form>' ;*/
+?> 	<tr>
+		<td>  <?= $post['titre']; ?> </td><td> <?= $post['contenu']; ?> </td>
+		<td> <a href="index.php?action=modifier&amp;id=<?= $post['id']; ?>">Modifier</a> </td>
+		<td> <a href="index.php?action=supprimer&amp;id=<?= $post['id']; ?>">Supprimer</a> </td>
+		<td> <a href="index.php?action=listComment&amp;id=<?= $post['id']; ?>">commentaires</a> </td>
+		<td> <a href="index.php?action=listPost&amp;id=<?= $post['id']; ?>">Ajouter un commentaires</a> </td>
+	</tr>						
+  
+<?php
 }
 ?>
     </table>
 
-	<body>
-
+	</body>
+</html>
 

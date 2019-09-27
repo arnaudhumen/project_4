@@ -49,7 +49,7 @@ class Commentaires
   {
     if (!is_string($nom) || empty($nom))
     {
-      $this->erreurs[] = self::TITRE_INVALIDE;
+      $this->erreurs[] = self::NOM_INVALIDE;
     }
     else
     {
