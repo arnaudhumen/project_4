@@ -23,5 +23,5 @@
 						</ul>
 					</form>
 
-			<a href="index.php">Retour a la liste des chapitres</a>
+			<a href="index.php?action=listPosts">Retour a la liste des chapitres</a>
 	<body>

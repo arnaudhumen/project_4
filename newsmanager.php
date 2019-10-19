@@ -31,7 +31,7 @@ class NewsManager
 
     public function getOneNews($id)
     {
-      $requete = $this->db->prepare('SELECT titre, contenu FROM blog WHERE id = :id');
+      $requete = $this->db->prepare('SELECT titre, contenu, id FROM blog WHERE id = :id');
       $requete->bindValue(':id', (int)$id, PDO::PARAM_INT);
       $requete->execute();
 

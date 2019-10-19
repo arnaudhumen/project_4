@@ -12,20 +12,21 @@
 		<header>
 			<h2>Tous les chapitres</h2>
 		</header>
-			<a href="index.php?action=addPost">Ajouter un chapitre</a>
+			<a href="index.php?action=loginView">Se connecter</a>
+			<a href="index.php?action=signinView">S'inscrire</a>
 
 			<table>
-      <tr><th>Titre</th><th>Contenu</th><th>Action</th><th></th></tr>
+      <tr><th>Titre</th><th>Contenu</th><!--<th>Action</th><th></th>--></tr>
       <!-- <tr><th>Auteur</th><th>Titre</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr> -->
 <?php
 while ($post = $data->fetch())
 {
 ?> 	<tr>
 		<td>  <?= $post['titre']; ?> </td><td> <?= $post['contenu']; ?> </td>
-		<td> <a href="index.php?action=modifier&amp;id=<?= $post['id']; ?>">Modifier</a> </td>
-		<td> <a href="index.php?action=supprimer&amp;id=<?= $post['id']; ?>">Supprimer</a> </td>
-		<td> <a href="index.php?action=listComment&amp;id=<?= $post['id']; ?>">commentaires</a> </td>
-		<td> <a href="index.php?action=listPost&amp;id=<?= $post['id']; ?>">Ajouter un commentaires</a> </td> 
+		<!-- <td> <a href="index.php?action=modifier&amp;id=<?= $post['id']; ?>">Modifier</a> </td> -->
+		<!-- <td> <a href="index.php?action=supprimer&amp;id=<?= $post['id']; ?>">Supprimer</a> </td> -->
+		<!-- <td> <a href="index.php?action=listComment&amp;id=<?= $post['id']; ?>">commentaires</a> </td> -->
+		<!-- <td> <a href="index.php?action=listPost&amp;id=<?= $post['id']; ?>">Ajouter un commentaires</a> </td>  -->
 	</tr>						
   
 <?php
@@ -35,4 +36,3 @@ while ($post = $data->fetch())
 
 	</body>
 </html>
-

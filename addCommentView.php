@@ -12,18 +12,18 @@
 		<header>
 			<h2>Tous les chapitres</h2>
 		</header>
-			<a href="index.php">Retour a la liste des chapitres</a>
+			<a href="index.php?action=listPosts">Retour a la liste des chapitres</a>
 
 
 			
-	<h3> <?= htmlspecialchars($news->titre()) ?> </h3>
-		<p> <?= htmlspecialchars($news->contenu()) ?> </p>
+	<h3> <?= htmlspecialchars($news->titre()); ?> </h3>
+		<p> <?= htmlspecialchars($news->contenu()); ?> </p>
 
-	<h4> Commentaires : </h4>
+	<h4> Commentaires : </h4>	
 
-	<a href="index.php?action=listComment&amp;id=<?= ($news->id()) ?>">Ajouter un commentaire</a>
+	<a href="index.php?action=listComment&amp;id=<?= $news->id(); ?>">Ajouter un commentaire</a>
 
-	<form action="index.php?action=addComment&amp;id=<?= ($news->id()) ?>" method="post">
+	<form action="index.php?action=addComment&amp;id=<?= $news->id(); ?>" method="post">
     	<div>
         	<label for="author">Auteur</label><br />
         	<input type="text" id="author" name="nom" />

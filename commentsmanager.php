@@ -12,9 +12,9 @@ class CommentsManager
   	public function postComment($postId, $nom, $contenuCom)
   	{
   		$requete = $this->db->prepare('INSERT INTO commentaires(post_id, nom, contenu_commentaire, dateAjout, dateModif) VALUES(?, ?, ?, NOW(), NOW())');
-  		$affectedLines = $requete->execute(array($postId, $nom, $contenuCom));
+  		$addcommentaire = $requete->execute(array($postId, $nom, $contenuCom));
 
-  		return $affectedLines;
+  		return $addcommentaire;
   	}
 
   	public function getComments($postId)

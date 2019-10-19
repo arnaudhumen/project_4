@@ -16,7 +16,7 @@ function addComment($postId, $nom, $contenuCom)
 	$managercomment = new CommentsManager($db);
 	$manager = new NewsManager($db);
 	
-	$affectedLines = $managercomment->postComment($postId, $nom, $contenuCom);	
+	$managercomment->postComment($postId, $nom, $contenuCom);	
 
 	$data = $manager->getNews();
 	require('View/listPostView.php');
