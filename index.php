@@ -35,6 +35,11 @@ if (isset($_GET['action']))
 		listPosts();
 	}
 
+	elseif ($_GET['action'] == 'listCommentAdmin')
+	{
+		listCommentAdmin($_GET['id'], $_GET['id']);
+	}
+
 	elseif ($_GET['action'] == 'supprimer')
 	{
 		deletePost($_GET['id']);
@@ -85,7 +90,16 @@ if (isset($_GET['action']))
 	{
 		deleteSignalComment($_GET['id']);
 		echo "Ce commentaire a bien été supprimé !</br> <a href=\"index.php?action=listPosts\">Retour a la liste des chapitres</a>";
+	}
 
+	elseif ($_GET['action'] == 'allowComment')
+	{
+		allowComment($_GET['id']);		
+	}
+
+	elseif ($_GET['action'] == 'refuseComment')
+	{
+		refuseComment($_GET['id']);		
 	}
 
 	elseif ($_GET['action'] == 'deconnexion')
@@ -131,13 +145,15 @@ if (isset($_GET['action']))
 		{								
 			addMemberIntoBAse($_POST['nom'], $_POST['mdp'], $_POST['confirme_mdp'], (int)$_POST['id_type'] = "2");
 		}
-		elseif(isset($_POST['mdp']) AND isset($_POST['nom']) AND $_POST['mdp'] == $_POST['confirme_mdp'])
-		{								
+		elseif(!empty($_POST['mdp']) AND !empty($_POST['nom']) AND $_POST['mdp'] == $_POST['confirme_mdp'])
+		{	
+		echo "<br><br><br><p style=\"color: white; font-family: 'Bree Serif', serif;  margin-top: 2%; text-align: center;\">Votre inscription a bien été prise en compte ! Connectez vous dès a présent ! <p>";							
 			addMemberIntoBAse($_POST['nom'], $_POST['mdp'], $_POST['confirme_mdp'], (int)$_POST['id_type'] = "1");
-		}
+		} 			
 		else
 		{
-			echo "Veuillez verifier que toutes les informations demandées sont remplis et/ou bien renseignées!";
+			echo "<script>alert(\"Veuillez verifier que toutes les informations demandées sont remplis et/ou bien renseignées!\")</script>";
+			signinFront();
 		}		
 	}
 
@@ -152,7 +168,8 @@ if (isset($_GET['action']))
 		
 		if(!$result)
 			{
-    			echo 'Mauvais identifiant ou mot de passe !';
+    			echo "<script>alert(\"Mauvais identifiant ou mot de passe!\")</script>";
+    			loginFront();
 			}
 			else
 			{
@@ -161,18 +178,21 @@ if (isset($_GET['action']))
         			        			
         			$_SESSION['id'] = $result['id'];
         			$_SESSION['nom'] = $_POST['nom_login'];
-        			echo 'Bienvenue ' . $_SESSION['nom'] . ' ! </br><a href="index.php?action=listPosts">Retour a l\'acceuil</a>';
+        			echo "<br><br><br><p style=\"color: white; font-size: 150%; font-family: 'Bree Serif', serif;  margin-top: 2%; margin-bottom: -4%; text-align: center;\">Bienvenue " . htmlspecialchars($_SESSION['nom']) . "</p>";
+        			listPosts();
     			}
     			elseif($correctPassword AND $result['id_type'] == 1)  
     			{
 					        			
         			$_SESSION['id'] = $result['id'];
         			$_SESSION['nom'] = $_POST['nom_login'];
-        			echo 'Bienvenue ' . $_SESSION['nom'] . ' ! </br><a href="index.php?action=listPostsMember">Retour a l\'acceuil</a>';
+        			echo "<br><br><br><p style=\"color: white; font-size: 150%; font-family: 'Bree Serif', serif;  margin-top: 2%; margin-bottom: -4%; text-align: center;\">Bienvenue " . htmlspecialchars($_SESSION['nom']) . "</p>";
+        			listPostsMember();
     			} 			
    				else 
    				{
-        			echo 'Mauvais identifiant ou mot de passe !';
+        			echo "<script>alert(\"Mauvais identifiant ou mot de passe!\")</script>";
+    				loginFront();
     			}			
 			}
 	}
